@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fiche de scoring — Entretiens Sonia Well</title>
+  <meta name="description" content="Formulaire interne de scoring pour l'analyse des besoins et la décision d'admission aux formations Sonia Well. Version Qualiopi-ready." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b0c10; --panel:#141723; --ink:#eceff4; --muted:#a3a7b3; --line:#2a2e3c; --accent:#d5b87a; --accent-ink:#111218; --ok:#72d49b; --warn:#e9c46a; --bad:#ef233c;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,#090a0e,#0f1118 40%,#0b0c10);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial}
+    .wrap{max-width:880px;margin:48px auto;padding:0 16px}
+    header{margin-bottom:18px}
+    h1{font-size:28px;margin:0}
+    p.lead{color:var(--muted);margin:8px 0 0}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:20px;box-shadow:0 16px 40px rgba(0,0,0,.35);padding:22px}
+    .grid{display:grid;gap:14px;grid-template-columns:1fr 1fr}
+    .grid-3{display:grid;gap:14px;grid-template-columns:1fr 1fr 1fr}
+    @media (max-width:760px){.grid,.grid-3{grid-template-columns:1fr}}
+    label{display:block;margin:8px 0 6px;font-weight:600}
+    input,select,textarea{width:100%;background:#0b0c12;border:1px solid var(--line);border-radius:14px;padding:12px 14px;color:var(--ink);outline:none}
+    input:focus,select:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(213,184,122,.12)}
+    textarea{min-height:120px;resize:vertical}
+    .hint{font-size:12px;color:var(--muted)}
+    .row{display:grid;gap:14px;grid-template-columns:1fr 1fr}
+    .meter{margin:6px 0 2px;display:flex;align-items:center;gap:8px}
+    .score-badge{display:inline-flex;align-items:center;gap:10px;border-radius:999px;padding:8px 12px;border:1px solid var(--line);background:#0b0c12;font-weight:800}
+    .score-badge[data-state="ok"]{border-color:rgba(114,212,155,.4)}
+    .score-badge[data-state="warn"]{border-color:rgba(233,196,106,.4)}
+    .score-badge[data-state="bad"]{border-color:rgba(239,35,60,.4)}
+    progress{width:180px;height:12px;border:0;border-radius:999px;overflow:hidden;background:#111}
+    progress::-webkit-progress-bar{background:#111}
+    progress::-webkit-progress-value{background:linear-gradient(90deg,var(--bad),var(--warn),var(--ok))}
+    .cta{display:flex;gap:12px;align-items:center;margin-top:18px}
+    button,.btn{appearance:none;border:none;background:var(--accent);color:var(--accent-ink);font-weight:800;border-radius:14px;padding:14px 18px;cursor:pointer}
+    .btn-ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
+    footer{margin:26px 0 40px;color:var(--muted);font-size:12px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Fiche de scoring — Entretiens Sonia Well</h1>
+      <p class="lead">Usage interne (Qualiopi). Après chaque appel, la formatrice remplit cette fiche. Le score et la décision sont archivés.</p>
+    </header>
+
+    <section class="card" aria-labelledby="form-title">
+      <h2 id="form-title" style="margin:0 0 6px;font-size:20px">Scoring entretien</h2>
+      <!-- Remplacez l'endpoint ci-dessous par votre second endpoint Formspree dédié au scoring -->
+      <form id="scoringForm" action="https://formspree.io/f/https://formspree.io/f/xldwqnzy method="POST" novalidate>
+        <div class="grid">
+          <div>
+            <label for="candidat">Nom du candidat</label>
+            <input id="candidat" name="candidat" required placeholder="Ex. Marie Dupont">
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required placeholder="nom@exemple.fr">
+          </div>
+        </div>
+
+        <div class="grid">
+          <div>
+            <label for="tel">Téléphone</label>
+            <input id="tel" name="telephone" type="tel" placeholder="06 xx xx xx xx">
+          </div>
+          <div>
+            <label for="formation">Formation demandée</label>
+            <select id="formation" name="formation" required>
+              <option value="">Choisir…</option>
+              <option>Madérothérapie — N1</option>
+              <option>Massage sportif — N1</option>
+              <option>Drainage lymphatique — N1</option>
+              <option>Kobido & Réflexologie — N1</option>
+              <option>Perfectionnement — N2</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div>
+            <label for="niveau">Niveau déclaré</label>
+            <select id="niveau" name="niveau">
+              <option>Débutant(e)</option>
+              <option>Intermédiaire</option>
+              <option>Professionnel(le)</option>
+            </select>
+          </div>
+          <div>
+            <label for="dispos">Disponibilités</label>
+            <select id="dispos" name="disponibilites">
+              <option>Lundi</option>
+              <option>Mardi</option>
+              <option>Indifférent</option>
+            </select>
+          </div>
+          <div>
+            <label for="lieu">Lieu préféré</label>
+            <select id="lieu" name="lieu_prefere">
+              <option>Saint‑Raphaël</option>
+              <option>Cannes</option>
+              <option>Indifférent</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div>
+            <label for="dateEnt">Date de l'entretien</label>
+            <input id="dateEnt" name="date_entretien" type="date" required>
+          </div>
+          <div>
+            <label for="interviewer">Interviewer</label>
+            <input id="interviewer" name="interviewer" placeholder="Sonia / Ahmed / autre">
+          </div>
+        </div>
+
+        <hr style="border:0;border-top:1px solid var(--line);margin:14px 0">
+        <p class="hint">Notes de 0 à 5. Le score est pondéré : Motivation 25% · Dispos 15% · Adéquation 20% · Projet 25% · Engagement 15%.</p>
+
+        <div class="grid">
+          <div>
+            <label for="motivation">Motivation (0–5)</label>
+            <input type="number" id="motivation" name="motivation" min="0" max="5" step="1" value="0">
+          </div>
+          <div>
+            <label for="disposOk">Disponibilités ok (0–5)</label>
+            <input type="number" id="disposOk" name="dispos_ok" min="0" max="5" step="1" value="0">
+          </div>
+        </div>
+        <div class="grid">
+          <div>
+            <label for="adequation">Adéquation niveau/formation (0–5)</label>
+            <input type="number" id="adequation" name="adequation" min="0" max="5" step="1" value="0">
+          </div>
+          <div>
+            <label for="projet">Projet pro réaliste (0–5)</label>
+            <input type="number" id="projet" name="projet" min="0" max="5" step="1" value="0">
+          </div>
+        </div>
+        <div class="grid">
+          <div>
+            <label for="engagement">Engagement / fiabilité (0–5)</label>
+            <input type="number" id="engagement" name="engagement" min="0" max="5" step="1" value="0">
+          </div>
+          <div>
+            <label for="commentSynth">Commentaire synthèse (interprétation de l'entretien)</label>
+            <input id="commentSynth" name="commentaire" placeholder="Très motivée, besoin N1 d'abord, dispo lundi am…">
+          </div>
+        </div>
+
+        <div class="meter">
+          <span class="score-badge" id="scoreBadge" data-state="bad">Score : <span id="score">0</span>/100 · Suggestion : <span id="suggestion">Attente</span></span>
+          <progress id="bar" max="100" value="0"></progress>
+        </div>
+
+        <div class="grid">
+          <div>
+            <label for="decision">Décision</label>
+            <select id="decision" name="decision" required>
+              <option>Accepté (date actuelle)</option>
+              <option>Liste d’attente (proposer autre date)</option>
+            </select>
+          </div>
+          <div>
+            <label for="dateProposee">Si attente → date proposée</label>
+            <input id="dateProposee" name="date_proposee" type="date">
+          </div>
+        </div>
+
+        <!-- Champs cachés envoyés -->
+        <input type="hidden" name="score_total" id="scoreHidden" value="0">
+        <input type="hidden" name="suggestion_auto" id="suggestionHidden" value="Attente">
+
+        <div class="cta">
+          <button type="submit">Enregistrer le scoring</button>
+          <a class="btn btn-ghost" href="./">Retour au formulaire candidats</a>
+        </div>
+        <p class="hint">Astuce : si « Liste d’attente », proposez tout de suite une date du prochain lundi/mardi et envoyez le mail type correspondant.</p>
+      </form>
+    </section>
+
+    <footer>
+      <div>Usage interne — AW Conseil & Formation (NDA : XXXXX). Ce document participe à l'analyse des besoins (Référentiel RNQ — Qualiopi).</div>
+    </footer>
+  </div>
+
+  <script>
+    const w = {motivation:25, disposOk:15, adequation:20, projet:25, engagement:15};
+    const inputs = ["motivation","disposOk","adequation","projet","engagement"].map(id=>document.getElementById(id));
+    const scoreEl = document.getElementById('score');
+    const badge = document.getElementById('scoreBadge');
+    const bar = document.getElementById('bar');
+    const suggEl = document.getElementById('suggestion');
+    const scoreHidden = document.getElementById('scoreHidden');
+    const suggestionHidden = document.getElementById('suggestionHidden');
+
+    function compute(){
+      const vals = {
+        motivation: Number(document.getElementById('motivation').value||0),
+        disposOk: Number(document.getElementById('disposOk').value||0),
+        adequation: Number(document.getElementById('adequation').value||0),
+        projet: Number(document.getElementById('projet').value||0),
+        engagement: Number(document.getElementById('engagement').value||0)
+      };
+      const score = Math.round((vals.motivation*w.motivation + vals.disposOk*w.disposOk + vals.adequation*w.adequation + vals.projet*w.projet + vals.engagement*w.engagement)/5);
+      scoreEl.textContent = score;
+      bar.value = score;
+      let state = 'bad', suggestion = 'Attente';
+      if(score >= 72){ state = 'ok'; suggestion = 'Accepté'; }
+      else if(score >= 60){ state = 'warn'; suggestion = 'Attente (prioritaire)'; }
+      badge.dataset.state = state;
+      suggEl.textContent = suggestion;
+      scoreHidden.value = String(score);
+      suggestionHidden.value = suggestion;
+    }
+    inputs.forEach(i=>i.addEventListener('input', compute));
+    compute();
+  </script>
+</body>
+</html>
