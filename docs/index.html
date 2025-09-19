@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pré-inscription — Formations Sonia Well</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    :root { --bg:#0e0f14; --card:#161824; --text:#e9eaee; --muted:#a3a7b3; --accent:#d4b26a; }
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial}
+    .wrap{max-width:720px;margin:40px auto;padding:0 16px}
+    .card{background:var(--card);border-radius:20px;padding:24px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    h1{font-size:28px;margin:0 0 8px} p.lead{color:var(--muted);margin:0 0 24px}
+    label{display:block;margin:14px 0 6px;font-weight:600}
+    input,select,textarea{width:100%;background:#0b0c12;border:1px solid #292c3a;border-radius:12px;padding:12px;color:var(--text)}
+    textarea{min-height:120px;resize:vertical}
+    .row{display:grid;gap:12px;grid-template-columns:1fr 1fr}
+    .row-3{display:grid;gap:12px;grid-template-columns:1fr 1fr 1fr}
+    .hint{font-size:12px;color:var(--muted)}
+    .checkbox{display:flex;gap:10px;align-items:flex-start;margin-top:10px}
+    button{width:100%;padding:14px 18px;border:none;border-radius:14px;background:var(--accent);color:#111;font-weight:800;cursor:pointer;margin-top:16px}
+    .disclaimer{font-size:12px;color:var(--muted);margin-top:12px}
+    a{color:var(--accent)}
+    @media (max-width:680px){.row,.row-3{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Pré-inscription — Formations Sonia Well</h1>
+      <p class="lead">Groupes de 7 personnes · Lundi & Mardi à Cannes · Early <strong>350 €</strong> · Dernière minute <strong>450 €</strong> · Première session <strong>17 novembre</strong>.</p>
+
+      <form action="https://formspree.io/f/TON_ENDPOINT" method="POST">
+        <div class="row">
+          <div>
+            <label for="nom">Nom complet</label>
+            <input id="nom" name="nom" required>
+          </div>
+          <div>
+            <label for="ville">Ville</label>
+            <input id="ville" name="ville" placeholder="Cannes, Nice…">
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required>
+          </div>
+          <div>
+            <label for="tel">Téléphone</label>
+            <input id="tel" name="telephone" type="tel" required>
+          </div>
+        </div>
+
+        <label for="formation">Formation visée</label>
+        <select id="formation" name="formation" required>
+          <option value="">Choisir…</option>
+          <option>Madérothérapie — Niveau 1 (Initiation)</option>
+          <option>Massage sportif — Niveau 1 (Initiation)</option>
+          <option>Drainage lymphatique — Niveau 1 (Initiation)</option>
+          <option>Kobido & Réflexologie — Niveau 1 (Initiation)</option>
+          <option>Perfectionnement (j’ai déjà fait le Niveau 1)</option>
+        </select>
+
+        <label for="experience">Ton niveau / expérience</label>
+        <select id="experience" name="experience" required>
+          <option value="">Choisir…</option>
+          <option>Débutant</option>
+          <option>Intermédiaire</option>
+          <option>Professionnel(le) en activité</option>
+        </select>
+
+        <label for="motivation">Ta motivation (en 5 lignes max)</label>
+        <textarea id="motivation" name="motivation" maxlength="600" placeholder="Pourquoi cette formation, pour quels objectifs ?"></textarea>
+        <div class="hint">Aide-nous à comprendre ton projet pour ajuster l’accompagnement.</div>
+
+        <div class="row-3">
+          <div>
+            <label for="jour">Disponibilités</label>
+            <select id="jour" name="jour" required>
+              <option value="">Choisir…</option>
+              <option>Lundi</option>
+              <option>Mardi</option>
+              <option>Indifférent (lundi/mardi)</option>
+            </select>
+          </div>
+          <div>
+            <label for="creneau">Créneau</label>
+            <select id="creneau" name="creneau" required>
+              <option value="">Choisir…</option>
+              <option>Matin</option>
+              <option>Après-midi</option>
+              <option>Journée</option>
+            </select>
+          </div>
+          <div>
+            <label for="date_pref">Date préférée</label>
+            <input id="date_pref" name="date_pref" type="date">
+          </div>
+        </div>
+
+        <div class="checkbox">
+          <input type="checkbox" id="sante" name="sante_ok" required>
+          <label for="sante">Je confirme ne pas présenter de contre-indication majeure au massage bien-être.</label>
+        </div>
+
+        <div class="checkbox">
+          <input type="checkbox" id="rgpd" name="rgpd" required>
+          <label for="rgpd">J’accepte l’utilisation de mes données pour gérer ma pré-inscription et la prise de rendez-vous. <a href="confidentialite.html" target="_blank" rel="noopener">Politique de confidentialité</a></label>
+        </div>
+
+        <!-- anti-spam -->
+        <input type="text" name="_gotcha" style="display:none">
+        <!-- redirection -->
+        <input type="hidden" name="_redirect" value="https://TON-NOM.github.io/TON-REPO/merci.html">
+
+        <button type="submit">Envoyer ma pré-inscription</button>
+        <div class="disclaimer">
+          Cette pré-inscription n’est pas un contrat. Un rendez-vous avec Sonia Well pourra être proposé pour évaluer la motivation et le niveau. L’inscription devient ferme uniquement après validation écrite et règlement.
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
